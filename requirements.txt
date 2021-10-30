@@ -3,7 +3,7 @@ streamlit==1.1.0
 tensorflow==2.6.0
 folium==0.12.1
 nltk==3.6.5
-PIL==7.0.0
+PIL==8.4.0
 numpy==1.19.5
 wordcloud==1.8.1
 snscrape==0.3.4
