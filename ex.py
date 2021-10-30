@@ -43,7 +43,7 @@ NEUTRAL = "NEUTRAL"
 SENTIMENT_THRESHOLDS = (0.4, 0.7)
 
 # loc = '30.88859095134539, 76.68799584206599, 300km'
-inputT=pd.DataFrame(itertools.islice(sntwitter.TwitterSearchScraper(f'near:"Delhi" within:100km ').get_items(),100))     # since:2021-10-25 until:2021-10-26
+inputT=pd.DataFrame(itertools.islice(sntwitter.TwitterSearchScraper(f'near:"Delhi" within:100km ').get_items(),600))     # since:2021-10-25 until:2021-10-26
 print(inputT.content.isna().sum())
 inputT=inputT[inputT.lang=='en']
 
