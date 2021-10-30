@@ -109,7 +109,7 @@ def folium_map():
     m= folium.Map(location=[df.Latitude.mean(),
                             df.Longitude.mean()], zoom_start=11, control_scale=True)
     group1 = folium.FeatureGroup(name='<span style=\\"color: red;\\">PS1 C1 circle (Blue)</span>')
-    group2 = folium.FeatureGroup(name='<span style=\\"color: blue;\\">PS2 C1 circle (Red)</span>')
+    group2 = folium.FeatureGroup(name='<span style=\\"color: blue;\\">PS2 C1 circle (Green)</span>')
     group3 = folium.FeatureGroup(name='<span style=\\"color: red;\\">PS3 C2 circle (Red)</span>')
     group4 = folium.FeatureGroup(name='<span style=\\"color: blue;\\">PS4 C2 circle (Black)</span>')
 
