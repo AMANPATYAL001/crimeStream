@@ -168,7 +168,7 @@ with st.expander("Word Cloud"):
 
 
 # print(final_df.content.isna().sum())
-st.write('Date','Tweet ID','Score','Username','Name','Location')
+# st.write('Date','Tweet ID','Score','Username','Name','Location')
 # def fun(x):
 #     print(x['date'],x['id'])
 #     st.write(x['date'],round(x['score'],3),x['user']['username'],x['user']['displayname'],x['user']['location'])
