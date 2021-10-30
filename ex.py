@@ -8,11 +8,11 @@ from nltk.stem import SnowballStemmer
 # from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 import streamlit as st
-from streamlit_folium import folium_static
+# from streamlit_folium import folium_static
 import pickle
-from PIL import Image
-import folium
-from wordcloud import WordCloud
+# from PIL import Image
+# import folium
+# from wordcloud import WordCloud
 import itertools
 import snscrape.modules.twitter as sntwitter
 import tensorflow as tf
@@ -109,61 +109,61 @@ def predict(text_list, include_neutral=True):
 # no=np.random.randint(0,190,189)
 
 # @st.cache
-def folium_map():
-    df=pd.read_csv('res/part1.csv')[['Police Station','Latitude','Longitude','Event Type']]
-    dfP1=df[df['Police Station']=='PS1'].reset_index()
-    dfP2=df[df['Police Station']=='PS2'].reset_index()
-    dfP3=df[df['Police Station']=='PS3'].reset_index()
-    dfP4=df[df['Police Station']=='PS4'].reset_index()
-    m= folium.Map(location=[df.Latitude.mean(),
-                            df.Longitude.mean()], zoom_start=11, control_scale=True)
-    group1 = folium.FeatureGroup(name='<span style=\\"color: red;\\">PS1 C1 circle (Blue)</span>')
-    group2 = folium.FeatureGroup(name='<span style=\\"color: blue;\\">PS2 C1 circle (Red)</span>')
-    group3 = folium.FeatureGroup(name='<span style=\\"color: red;\\">PS3 C2 circle (Red)</span>')
-    group4 = folium.FeatureGroup(name='<span style=\\"color: blue;\\">PS4 C2 circle (Black)</span>')
+# def folium_map():
+#     df=pd.read_csv('res/part1.csv')[['Police Station','Latitude','Longitude','Event Type']]
+#     dfP1=df[df['Police Station']=='PS1'].reset_index()
+#     dfP2=df[df['Police Station']=='PS2'].reset_index()
+#     dfP3=df[df['Police Station']=='PS3'].reset_index()
+#     dfP4=df[df['Police Station']=='PS4'].reset_index()
+#     m= folium.Map(location=[df.Latitude.mean(),
+#                             df.Longitude.mean()], zoom_start=11, control_scale=True)
+#     group1 = folium.FeatureGroup(name='<span style=\\"color: red;\\">PS1 C1 circle (Blue)</span>')
+#     group2 = folium.FeatureGroup(name='<span style=\\"color: blue;\\">PS2 C1 circle (Red)</span>')
+#     group3 = folium.FeatureGroup(name='<span style=\\"color: red;\\">PS3 C2 circle (Red)</span>')
+#     group4 = folium.FeatureGroup(name='<span style=\\"color: blue;\\">PS4 C2 circle (Black)</span>')
 
-    for i,j in enumerate(zip(dfP1.Latitude,dfP1.Longitude)):
-        location = [j[0],j[1]]
-        folium.CircleMarker(location,radius=1,popup=dfP1['Event Type'][i]).add_to(group1)
-    group1.add_to(m)
+#     for i,j in enumerate(zip(dfP1.Latitude,dfP1.Longitude)):
+#         location = [j[0],j[1]]
+#         folium.CircleMarker(location,radius=1,popup=dfP1['Event Type'][i]).add_to(group1)
+#     group1.add_to(m)
 
-    for i,j in enumerate(zip(dfP2.Latitude,dfP2.Longitude)):
-        location = [j[0],j[1]]
-        folium.CircleMarker(location,radius=1,popup=dfP2['Event Type'][i],color='green').add_to(group2)
-    group2.add_to(m)
+#     for i,j in enumerate(zip(dfP2.Latitude,dfP2.Longitude)):
+#         location = [j[0],j[1]]
+#         folium.CircleMarker(location,radius=1,popup=dfP2['Event Type'][i],color='green').add_to(group2)
+#     group2.add_to(m)
 
-    for i,j in enumerate(zip(dfP3.Latitude,dfP3.Longitude)):
-        location = [j[0],j[1]]
-        folium.CircleMarker(location,radius=1,popup=dfP3['Event Type'][i],color='red').add_to(group3)
-    group3.add_to(m)
+#     for i,j in enumerate(zip(dfP3.Latitude,dfP3.Longitude)):
+#         location = [j[0],j[1]]
+#         folium.CircleMarker(location,radius=1,popup=dfP3['Event Type'][i],color='red').add_to(group3)
+#     group3.add_to(m)
 
-    for i,j in enumerate(zip(dfP4.Latitude,dfP4.Longitude)):
-        location = [j[0],j[1]]
-        folium.CircleMarker(location,radius=1,popup=dfP4['Event Type'][i],color='black').add_to(group4)
-    group4.add_to(m)
+#     for i,j in enumerate(zip(dfP4.Latitude,dfP4.Longitude)):
+#         location = [j[0],j[1]]
+#         folium.CircleMarker(location,radius=1,popup=dfP4['Event Type'][i],color='black').add_to(group4)
+#     group4.add_to(m)
 
-    folium.map.LayerControl('topright', collapsed=False).add_to(m)
-    # return folium_static(m)
-    folium_static(m)
-folium_map()
+#     folium.map.LayerControl('topright', collapsed=False).add_to(m)
+#     # return folium_static(m)
+#     folium_static(m)
+# folium_map()
 
-with st.expander("Word Cloud"):
-        # st.header('WordCloud')
-        tw_mask = np.array(Image.open("res/images.jpg").convert('1'))
+# with st.expander("Word Cloud"):
+#         # st.header('WordCloud')
+#         tw_mask = np.array(Image.open("res/images.jpg").convert('1'))
 
-        def transform_format(val):
-            if val == 0:
-                return val
-            else:
-                return 255
-        transformed_wine_mask = np.ndarray((tw_mask.shape[0],tw_mask.shape[1]), np.int32)
+#         def transform_format(val):
+#             if val == 0:
+#                 return val
+#             else:
+#                 return 255
+#         transformed_wine_mask = np.ndarray((tw_mask.shape[0],tw_mask.shape[1]), np.int32)
 
-        for i in range(len(tw_mask)):
-            transformed_wine_mask[i] = list(map(transform_format, tw_mask[i]))
-        wc = WordCloud(background_color="white", max_words=1000, mask=transformed_wine_mask,width=300,contour_color='firebrick',contour_width=2)
+#         for i in range(len(tw_mask)):
+#             transformed_wine_mask[i] = list(map(transform_format, tw_mask[i]))
+#         wc = WordCloud(background_color="white", max_words=1000, mask=transformed_wine_mask,width=300,contour_color='firebrick',contour_width=2)
                     
-        wc.generate(' '.join(out.values))
-        st.image(wc.to_array(),width=370)
+#         wc.generate(' '.join(out.values))
+#         st.image(wc.to_array(),width=370)
 
 
 
