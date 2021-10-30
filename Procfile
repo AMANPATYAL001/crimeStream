@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run ex.py
+web: sh setup.sh && streamlit run SecureTech.py
