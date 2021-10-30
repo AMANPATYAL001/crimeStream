@@ -7,3 +7,4 @@ Pillow==7.0.0
 numpy==1.19.5
 wordcloud==1.8.1
 snscrape==0.3.4
+streamlit_folium==0.4.0
